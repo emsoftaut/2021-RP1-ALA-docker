@@ -1,6 +1,26 @@
-rp1
+This project is a work in progress docker implementation of the ALA compliant demo calculator similar to the one at https://github.com/johnspray74/ReactiveCalculator. This project uses `ASP.NET Core`, `.NET 5`, which is the cross-platform version of .NET. 
 
-## Generating SSL certificates 
+Refer https://docs.microsoft.com/en-us/dotnet/standard/choosing-core-framework-server. 
+
+## Running without HTTPS
+### Building the docker image
+```
+docker build --pull -t dotnetapp:alpine -f Dockerfile.alpine-x64 .
+```
+### Running the docker image
+```
+docker run -p 8000:80 dotnetapp:alpine
+```
+
+## Running with HTTPS (in progress)
+Currently facing issues with getting the certificates for SSL. Referred https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-5.0&tabs=visual-studio#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos and https://github.com/dotnet/AspNetCore.Docs/issues/6199
+
+
+Getting the following error :
+
+`There was an error exporting HTTPS developer certificate to a file.` Some of the steps followed are put below.
+
+### Generating SSL certificates 
 
 Refer https://docs.microsoft.com/en-us/aspnet/core/security/docker-https?view=aspnetcore-5.0
 
@@ -11,16 +31,8 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p yourpass
 Mac/Linux
 ```
 dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p yourpasswordhere
-dotnet dev-certs https -v -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p 
-dotnet dev-certs https -v -ep ${HOME}/.aspnet/https/aspnetapp.pfx
 ```
-```
-dotnet dev-certs https --trust
-```
-
-### Certificate Errors
-Refer https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-5.0&tabs=visual-studio#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos and https://github.com/dotnet/AspNetCore.Docs/issues/6199
-
+### Clean and trust
 Run `dotnet dev-certs https --clean` followed by `dotnet dev-certs https --trust` if you have certificate issues.
 
 ### Building the docker image
