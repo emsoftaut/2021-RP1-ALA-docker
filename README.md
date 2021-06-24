@@ -2,12 +2,20 @@ This project is a work in progress docker implementation of the ALA compliant de
 
 Refer https://docs.microsoft.com/en-us/dotnet/standard/choosing-core-framework-server. 
 
+Read more about ALA here https://abstractionlayeredarchitecture.com
+
+# Using .NET CLI
+To run the project use the command `dotnet run`.
+
+For development, start with a file watcher using `dotnet watch run`.
+
+# Using Docker
 ## Running without HTTPS
-### Building the docker image
+### Building the image
 ```
 docker build --pull -t dotnetapp:alpine -f Dockerfile.alpine-x64 .
 ```
-### Running the docker image
+### Running the image
 ```
 docker run -p 8000:80 dotnetapp:alpine
 ```
