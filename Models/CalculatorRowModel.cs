@@ -13,9 +13,9 @@ namespace rp1.Models
 
     public CalculatorRowModel()
     {
-      label = "a";
-      formula = "b";
-      result = "c";
+      label = "";
+      formula = "";
+      result = "";
     }
   }
 }

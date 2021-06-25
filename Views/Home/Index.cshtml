@@ -1,41 +1,54 @@
-﻿<section>
+﻿@model CalculatorModel
+
+<section>
 	<h2>
 		Reactive Calculator
 	</h2>
 </section>
+
 <section>
 	<label>Label</label>
 	<label>Formula</label>
 	<label>Result</label>
 </section>
-<section class="main-section">
-	<article>
-		<div class="article-div">
-			<input type="text" name="label">
-		</div>
-		<div class="article-div">
-			<input type="text" name="label">
-		</div>
-		<div class="article-div">
-			<p>
-				52
-			</p>
-		</div>
-	</article>
-	<article>
-		<div class="article-div">
-			<input type="text" name="label">
-		</div>
-		<div class="article-div">
-			<input type="text" name="label">
-		</div>
-		<div class="article-div">
-			<p>
-				52
-			</p>
-		</div>
-	</article>
-</section>
-<section class="bottom-section">
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+	<section class="main-section">
+	@if (Model != null && Model.calculatorState.Count > 0)
+		{
+			@for (var rowNo = 0; rowNo < Model.calculatorState.Count; rowNo++)
+			{
+				<article>
+					<div class="article-div">
+						<input asp-for="calculatorState[rowNo].label" type="text" name="label">
+					</div>
+					<div class="article-div">
+						<input asp-for="calculatorState[rowNo].formula" type="text" name="formula">
+					</div>
+					<div class="article-div">
+						<input asp-for="calculatorState[rowNo].result" disabled type="text" name="result">
+					</div>
+				</article>
+			}
+		}
+		else
+		{
+			<article>
+				<div class="article-div">
+					<input type="text" name="label">
+				</div>
+				<div class="article-div">
+					<input type="text" name="formula">
+				</div>
+				<div class="article-div">
+					<p></p>
+				</div>
+			</article>
+		}
+	</section>
+	<section class="bottom-section">
 	<button>Add row</button>
+	<button type="submit" value="Submit">Submit</button>
 </section>
+}
