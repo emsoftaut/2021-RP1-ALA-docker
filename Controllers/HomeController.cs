@@ -60,12 +60,15 @@ namespace rp1.Controllers
     {
       _logger.LogInformation("POST Calculate");
       var sum = 0;
+      var labelString = "";
       foreach (var calculatorRow in calculator.calculatorState)
       {
+        labelString = labelString + " " + calculatorRow.label + " +";
         sum += Convert.ToInt32(calculatorRow.formula);
       }
       var resultRow = new CalculatorRowModel();
-      resultRow.formula = sum.ToString();
+      resultRow.result = sum.ToString();
+      resultRow.formula = labelString.TrimEnd('+');
       calculator.calculatorState.Add(resultRow);
       TempData["prevState"] = JsonSerializer.Serialize(calculator);
       return RedirectToAction("Index");
