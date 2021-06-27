@@ -21,13 +21,13 @@
 			{
 				<article>
 					<div class="article-div">
-						<input asp-for="calculatorState[rowNo].label" type="text" name="label">
+						<input asp-for="calculatorState[rowNo].label" type="text">
 					</div>
 					<div class="article-div">
-						<input asp-for="calculatorState[rowNo].formula" type="text" name="formula">
+						<input asp-for="calculatorState[rowNo].formula" type="text">
 					</div>
 					<div class="article-div">
-						<input asp-for="calculatorState[rowNo].result" disabled type="text" name="result">
+						<input asp-for="calculatorState[rowNo].result" disabled type="text">
 					</div>
 				</article>
 			}
@@ -36,19 +36,19 @@
 		{
 			<article>
 				<div class="article-div">
-					<input type="text" name="label">
+					<input asp-for="calculatorState[0].label" type="text">
 				</div>
 				<div class="article-div">
-					<input type="text" name="formula">
+					<input asp-for="calculatorState[0].formula" type="text">
 				</div>
 				<div class="article-div">
-					<p></p>
+				<input asp-for="calculatorState[0].result" disabled type="text">
 				</div>
 			</article>
 		}
 	</section>
 	<section class="bottom-section">
-	<button>Add row</button>
-	<button type="submit" value="Submit">Submit</button>
-</section>
+		<button type="submit" class="submit" formaction='@Url.Action("Calculate", "Home", FormMethod.Post)' method="POST">Submit</button>
+		<button type="submit" class="addRow" formaction='@Url.Action("AddRow", "Home", FormMethod.Post)' method="POST">Add row</button>
+	</section>
 }

@@ -11,6 +11,7 @@ namespace rp1.Models
     public string formula { get; set; }
     public string result { get; set; }
 
+    // Model bound complex types must not be abstract or value types and must have a parameterless constructor.
     public CalculatorRowModel()
     {
       label = "";
